@@ -15,6 +15,7 @@ import os
 import csv
 import logging
 
+from Config import Config
 import sys
 
 class SFEnv(gym.Env):
@@ -81,19 +82,19 @@ class SFEnv(gym.Env):
 
 
 		#------CONFIGURE-----
-		mode='human_sleep'
+		mode=Config.MODE
 		record_path=None
 		no_direction=False
-		frame_skip=1
+		frame_skip=Config.FRAME_SKIP
 		lib_suffix = ""
 		self.mode = mode
-		debug = False
+		debug = Config.DEBUG
 		os = platform
 
 		self.debug = debug
 		self.frame_skip = frame_skip
-		self.play = True
-		self.save = False
+		self.play = Config.PLAY
+		self.save = Config.SAVE_IMAGES
 
 		if self.game.lower() == ("sf") or self.game.lower() == ("sfs"):
 			libname = "sf"
@@ -111,13 +112,15 @@ class SFEnv(gym.Env):
 			libname += "_frame_lib"
 		libname += lib_suffix + ".so"
 
-		if os.startswith('linux'): # come up with something nicer for this:
-			from pathlib import Path
-			pitur_dir = "/home/pitur/Downloads/Gym-rijnder/gym-master/gym/envs/space_fortress/linux2"
-			rijnder_dir = "/home/rijnder/TweedejaarsProject/gym-master/gym/envs/space_fortress/linux2"
-			libpath = pitur_dir if Path(pitur_dir).is_dir() else rijnder_dir
-		elif os.startswith('darwin'):
-			libpath = "/Users/rijnderwever/Desktop/NLR/NLR/TweedejaarsProject/gym-master/gym/envs/space_fortress/darwin"
+		# if os.startswith('linux'): # come up with something nicer for this:
+		# 	from pathlib import Path
+		# 	pitur_dir = "/home/pitur/Downloads/Gym-rijnder/gym-master/gym/envs/space_fortress/linux2"
+		# 	rijnder_dir = "/home/rijnder/TweedejaarsProject/gym-master/gym/envs/space_fortress/linux2"
+		# 	libpath = pitur_dir if Path(pitur_dir).is_dir() else rijnder_dir
+		# elif os.startswith('darwin'):
+		# 	libpath = "/Users/rijnderwever/Desktop/NLR/NLR/TweedejaarsProject/gym-master/gym/envs/space_fortress/darwin"
+		libpath="linux2"
+		
 		self.update = ctypes.CDLL(libpath + '/'+libname).update_frame
 		self.init_game = ctypes.CDLL(libpath +'/'+libname).start_drawing
 		self.act = ctypes.CDLL(libpath +'/'+libname).set_key
@@ -216,12 +219,12 @@ class SFEnv(gym.Env):
 					img = np.ctypeslib.as_array(new_frame)
 					img = np.reshape(img, (int(self.screen_height/self.scale), int(self.screen_width/self.scale)))
 					if self.mode == 'minimal_sleep':
-						zzz = 42
+						zzz = Config.SLEEP
 				elif self.mode.startswith('human'):
 					new_frame = self.pretty_screen().contents
 					img = np.ctypeslib.as_array(new_frame)
 					if self.mode=='human_sleep':
-						zzz = 43 # Sleep for about 50 ms, the original delay (more because it seemed fast)
+						zzz = Config.SLEEP # Sleep for about 50 ms, the original delay (more because it seemed fast)
 					img = np.reshape(img, (self.screen_height, self.screen_width, 2))
 					img = cv2.cvtColor(img, cv2.COLOR_BGR5652RGB)
 					img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -254,7 +257,7 @@ class SFEnv(gym.Env):
 					cv2.imshow(self.game_name, img)
 				cv2.waitKey(zzz)
 		if self.save:
-			self.save_image(path="/home/putri/Documents/Gym-rijnder/gym-master/gym/envs/space_fortress/snapshots")
+			self.save_image(path=Config.IMAGES_PATH)
 
 
 	# return: (states, observations)

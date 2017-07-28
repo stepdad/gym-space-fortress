@@ -7,6 +7,8 @@ import numpy as np
 from random import random
 import cv2 # remove at one point
 from time import sleep
+from Config import Config
+
 try:
 	from pynput.keyboard import Key, Listener
 except:
@@ -36,19 +38,12 @@ def on_release(key):
 def on_release(key):
 	pass
 
-global render_mode
-render_mode = "rgb_array"
 current_key = 1
-if render_mode.endswith("debug"):
+if Config.MODE.endswith("debug"):
 	print("Note that this script should be run as super user under OS X 👁")
 
 
-env = gym.make('SFS-v0')
-
-# Configure enviroment
-#-------------------------------
-
-# env.configure2(mode=render_mode, record_path=None, no_direction=False, frame_skip=2)
+env = gym.make(Config.GAME_ENV)
 
 
 
@@ -81,6 +76,3 @@ with Listener(on_press=on_press, on_release=on_release) as listener:
 	#			count += 1
 				# print("Episode finished after {} timesteps".format(t+1))
 	#				break
-
-#	env.write_out_stats("test")
-#	env.close()
