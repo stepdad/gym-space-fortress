@@ -223,6 +223,7 @@ void Handle_Aim_Mine()
 							/* erase mine */
 		  Mine_Flag=DEAD;
 		  Mine_Dead_Counter=0;
+      Score = MISSED_MINE_PENALTY;
 		  break;
 		}
   case DEAD   : {
@@ -236,7 +237,7 @@ void Handle_Aim_Mine()
 		   break;
 		}
   case ALIVE  : {
-		  if(Mine_Alive_Counter++ >= Mine_Live_Loops)
+		  if(Mine_Alive_Counter++ >= MINE_LIVE_LOOPS)
 		  Mine_Flag=KILL;
 		}
  } /* end switch */
@@ -286,7 +287,7 @@ void Handle_Missile()
 			 || (Missile_Y_Pos[i]<=41) || (Missile_Y_Pos[i]>=MaxY-41))
 				{
 			    	Missile_Flag[i]=KILL;
-					Score = -0.1;
+					Score = SPRAYING_PENALTY;
 				}
 			 else
 			  {

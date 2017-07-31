@@ -26,6 +26,7 @@ mine_type Mine_Type;
 int Mine_Alive_Counter=0;
 int Mine_Dead_Counter=0;
 int Missile_Delay_Counter=0;
+int Wrapped=0;
 
 
 // Not needed ?
@@ -72,15 +73,19 @@ void Move_Ship()
 	#else
 	if(Ship_X_Pos<0) {
 		Ship_X_Pos=MaxX;
+		Wrapped = 1;
 	}
     else if(Ship_X_Pos>MaxX) {
     	Ship_X_Pos=0;
+			Wrapped = 1;
 	}
     else if(Ship_Y_Pos<0) {
 		Ship_Y_Pos=MaxY;
+		Wrapped = 1;
 	}
     else if(Ship_Y_Pos>MaxY) {
     	Ship_Y_Pos=0;
+			Wrapped = 1;
 	}
 	#endif
 
@@ -169,14 +174,26 @@ void Move_Ship()
 			}
 
 			#else
-	     if(Ship_X_Pos<0) { Ship_X_Pos=MaxX;
-		  Wrap_Around_Flag=ON; }
-	     if(Ship_X_Pos>MaxX) { Ship_X_Pos=0;
-			     Wrap_Around_Flag=ON; }
-	     if(Ship_Y_Pos<0) { Ship_Y_Pos=MaxY;
-		  Wrap_Around_Flag=ON; }
-	     if(Ship_Y_Pos>MaxY) { Ship_Y_Pos=0;
-			     Wrap_Around_Flag=ON; }
+	     if(Ship_X_Pos<0) {
+				 Ship_X_Pos=MaxX;
+				 Wrap_Around_Flag=ON;
+				 Wrapped = 1;
+			 }
+	     if(Ship_X_Pos>MaxX) {
+				 Ship_X_Pos=0;
+			   Wrap_Around_Flag=ON;
+				 Wrapped = 1;
+			 }
+	     if(Ship_Y_Pos<0) {
+				 Ship_Y_Pos=MaxY;
+				 Wrap_Around_Flag=ON;
+				 Wrapped = 1;
+			 }
+	     if(Ship_Y_Pos>MaxY) {
+				 Ship_Y_Pos=0;
+			   Wrap_Around_Flag=ON;
+				 Wrapped = 1;
+			 }
 			#endif
  	}
 
@@ -215,6 +232,14 @@ void Fire_Shell()
 //	Shell_Should_Clean = 1;
 //  sound(800);
 //  Sound_Flag=6;
+}
+
+int Check_Wrapped(){
+	return Wrapped;
+}
+
+void Unwrap(){
+	Wrapped = 0;
 }
 
 void Handle_Fortress(cairo_t *cr)

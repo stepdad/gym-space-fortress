@@ -10,10 +10,11 @@ void Update_Ship_Display();
 void Move_Ship();
 
 void Fire_Shell();
-void Handle_Fortress(); 
+void Handle_Fortress();
 
 int randrange(int min, int max);
-
+int Check_Wrapped();
+void Unwrap();
 void Handle_Speed_Score();
 void Clear_Mine_Type();
 

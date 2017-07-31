@@ -174,7 +174,7 @@ int timeval_subtract(struct timeval *result, struct timeval *t2, struct timeval 
 // to wait still in this thingy)
 static gboolean on_draw_event(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
-//	printf("Ship pos on draw: %d %d\n", Ship_X_Pos, Ship_Y_Pos);
+	printf("Ship pos on draw: %d %d\n", Ship_X_Pos, Ship_Y_Pos);
 
 	// Oddly enough, clipping seems to work different accros surfaces. Therefore it is
 	// sometimes wise to set things to always update here. (a clip within a quartz

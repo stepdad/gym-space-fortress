@@ -237,7 +237,7 @@ void Test_Collisions()
 	     Handle_Missile_Flag=ON;
 
 	      Score = FORTRESS_SHOT_SCORE;
-	      if(Vulner_Counter > 1) // was >= 4 (DEATH)
+	      if(Vulner_Counter >= FORTRESS_LIVES) // was >= 4 (DEATH)
 	      {
 	      	#ifdef DEBUG
 	      	system("say \"You won!\"&");

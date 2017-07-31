@@ -192,7 +192,6 @@ class SFEnv(gym.Env):
 	def _step(self, a):
 		action = self._action_set[a] # Select the action from the action dictq
 		reward = 0.0
-		print(a)
 		done = False
 		for _ in range(self.frame_skip):
 			self.act(action)
@@ -224,7 +223,7 @@ class SFEnv(gym.Env):
 					new_frame = self.pretty_screen().contents
 					img = np.ctypeslib.as_array(new_frame)
 					if self.mode=='human_sleep':
-						zzz = Config.SLEEP # Sleep for about 50 ms, the original delay (more because it seemed fast)
+						zzz = Config.SLEEP
 					img = np.reshape(img, (self.screen_height, self.screen_width, 2))
 					img = cv2.cvtColor(img, cv2.COLOR_BGR5652RGB)
 					img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)

@@ -3,6 +3,7 @@
 #define GLOBALS
 #include "myconst.h"
 #include "myext.h"
+#include "external_constants.h"
 //#include "myvars.h"
 #endif
 

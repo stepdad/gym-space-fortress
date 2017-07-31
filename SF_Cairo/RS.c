@@ -377,6 +377,7 @@ void SF_iteration()
 	Loop_Counter++;
 
 
+
   #ifdef GAME_DURATION_TERMINAL
     if(Loop_Counter >= GAME_DURATION){
       Terminal_State = 1;
@@ -396,7 +397,15 @@ void SF_iteration()
 	// Pauses the game (when the flag is set, continues this loop)
 //	while(Freeze_Flag) Get_User_Input();
 	Move_Ship();
-	Handle_Missile();
+  #ifdef PENALIZE_WRAPPING
+    
+    if(Check_Wrapped()==1){
+      Score = PENALTY_WRAPPING;
+      Unwrap();
+    }
+  #endif
+
+  Handle_Missile();
 	//            if(Sound_Flag>1) Sound_Flag--;
 	//            if(Sound_Flag==1) {Sound_Flag--; nosound();}
 	// Handle_Mine();
@@ -434,7 +443,7 @@ void game_iteration()
 // to wait still in this thingy)
 static gboolean on_draw_event(GtkWidget *widget, cairo_t *cr, gpointer user_data)
 {
-//	printf("Ship pos on draw: %d %d\n", Ship_X_Pos, Ship_Y_Pos);
+
 
 	// Oddly enough, clipping seems to work different accros surfaces. Therefore it is
 	// sometimes wise to set things to always update here. (a clip within a quartz

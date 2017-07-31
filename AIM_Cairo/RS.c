@@ -378,12 +378,17 @@ void SF_iteration()
 //	Handle_Bonus();
 
 //	Score=Points+Velocity+Control+Speed;
+  #ifdef GAME_DURATION_TERMINAL
+    if(Loop_Counter > GAME_DURATION){
+      Terminal_State = 1;
+    }
+  #endif
 
-	if(Loop_Counter >= 2400)
-	{
-		Loop_Counter = 0;
-		Terminal_State = 1;
-	}
+	// if(Loop_Counter >= 2400)
+	// {
+	// 	Loop_Counter = 0;
+	// 	Terminal_State = 1;
+	// }
 }
 
 

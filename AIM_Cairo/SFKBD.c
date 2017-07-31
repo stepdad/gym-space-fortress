@@ -10,7 +10,7 @@
 
 #include "myconst.h"
 #include "myext.h"  /* modify to myext.h */
-
+#include "external_constants.h"
 //int readkey(void);
 //int write_file(char filename[],int first_time,int sess);
 //int read_file(char filename[],int displ,int sess);

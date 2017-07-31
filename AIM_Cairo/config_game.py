@@ -9,20 +9,18 @@ if(input == "y"):
     external_constants.append("GAME_DURATION "+input)
 
 
-input = raw_input("Penalty for missed square (negative int): \n")
+input = raw_input("Penalty for missed mine (negative int): \n")
 external_constants.append("MISSED_MINE_PENALTY "+input)
 
-input = raw_input("Reward for collected square (int): \n")
-external_constants.append("COLLECTED_MINE_REWARD "+input)
+input = raw_input("Reward for shooting a mine (int): \n")
+external_constants.append("SHOT_MINE_REWARD "+input)
 
-input = raw_input("Duration square life (int): \n")
-external_constants.append("MAX_SQUARE_STEPS "+input)
+input = raw_input("Duration mine life (int): \n")
+external_constants.append("MINE_LIVE_LOOPS "+input)
 
-input = raw_input("Maximum amount of squares? (y/n): \n")
-if(input == "y"):
-    external_constants.append("MAX_SQUARES_TERMINAL")
-    input = raw_input("Max squares (int):\n")
-    external_constants.append("MAX_SQUARES "+input)
+input = raw_input("Penalty for spraying (negative int): \n")
+external_constants.append("SPRAYING_PENALTY "+input)
+
 print(external_constants)
 print("Switches: \n")
 input = raw_input("GUI_INTERFACE (y/n): \n")

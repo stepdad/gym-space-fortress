@@ -17,7 +17,7 @@
 #include "HM.h"
 #include "RS.h"
 #include "TCOL.h"
-
+#include "external_constants.h"
 
 //#include "myconst.h"
 //#include "myext.h"
@@ -105,7 +105,7 @@ void Test_Collisions()
     Handle_Missile_Flag=ON;
 
     Mine_Flag=KILL;
-    Score=1.0;
+    Score= SHOT_MINE_REWARD;
     Handle_Mine();
       } /* end missile vs. mine for aiming test */
     }

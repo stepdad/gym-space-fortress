@@ -7,22 +7,28 @@ if(input == "y"):
     external_constants.append("GAME_DURATION_TERMINAL")
     input = raw_input("Game duration (int):\n")
     external_constants.append("GAME_DURATION "+input)
+    input = raw_input("Score after game duration has ended (int):\n")
+    external_constants.append("GAME_OVER_SCORE "+input)
 
 
-input = raw_input("Penalty for missed square (negative int): \n")
-external_constants.append("MISSED_MINE_PENALTY "+input)
+input = raw_input("Reward for hitting fortress with missile (int): \n")
+external_constants.append("FORTRESS_SHOT_SCORE "+input)
 
-input = raw_input("Reward for collected square (int): \n")
-external_constants.append("COLLECTED_MINE_REWARD "+input)
+input = raw_input("Penalty for being hit by fortress missile (negative int): \n")
+external_constants.append("SHOT_BY_FORTRESS_PENALTY "+input)
 
-input = raw_input("Duration square life (int): \n")
-external_constants.append("MAX_SQUARE_STEPS "+input)
+input = raw_input("Amount of lives of the ship (int): \n")
+external_constants.append("MAX_SHIP_DAMAGE "+input)
 
-input = raw_input("Maximum amount of squares? (y/n): \n")
+input = raw_input("Amount of lives of the fortress (int): \n")
+input = str(int(input)-1)
+external_constants.append("FORTRESS_LIVES "+input)
+
+input = raw_input("Penalize wrapping? (y/n): \n")
 if(input == "y"):
-    external_constants.append("MAX_SQUARES_TERMINAL")
-    input = raw_input("Max squares (int):\n")
-    external_constants.append("MAX_SQUARES "+input)
+    external_constants.append("PENALIZE_WRAPPING")
+    input = raw_input("Penalty for wrapping (negative int):\n")
+    external_constants.append("PENALTY_WRAPPING "+input)
 print(external_constants)
 print("Switches: \n")
 input = raw_input("GUI_INTERFACE (y/n): \n")
@@ -63,5 +69,3 @@ target.truncate()
 target.write('#!/bin/sh\nSwitches="'+switches+'"\n' )
 target.write('eval "$(cat DE_Minimal.c | grep -m 4 "\-\-cflags cairo")"; cp *.so ../gym-master/gym/envs/space_fortress/linux2')
 target.close()
-
-# switches = ['-D '+switch+' ' for switch in Config.SWITCHES]

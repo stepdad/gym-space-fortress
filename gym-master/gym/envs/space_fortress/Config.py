@@ -10,13 +10,14 @@ class Config:
 
     MODE = 'human_sleep'
 
-    RENDER = True
-
+    # Render the game?
     PLAY = True
 
     FRAME_SKIP = 1
 
-    SLEEP = 100
+    # if mode contains sleep
+
+    SLEEP = 42
 
     DEBUG = False
 
