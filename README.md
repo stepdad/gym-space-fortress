@@ -12,7 +12,8 @@ The Control task (SFC-v0)
 
 The Aiming task (AIM-v0)
 
-*Installation*
+# *Installation*
+
 To install the current gym framework, navigate to Gym-rijnder/gym-master and execute:
 
 pip install -e .
@@ -22,7 +23,7 @@ Installation should now be complete.
 
 A Gym environment can be created by compiling the desired game and configuring the environment. This will be demonstrated by means of an example.
 
-*Game compilation*
+# *Game compilation*
 
 To compile the Control task, navigate towards the folder that holds its c-code (SF_Control) and run the configuration/settings script config_game.py. After choosing the desired settings, run ./compile_game.sh. This copies the shared object files of the game to a location where they will be easily accessible for the Gym environment. The Control task is now compiled with the desired settings.
 
@@ -40,7 +41,7 @@ eval "$(cat DE_Minimal.c | grep -m 4 "\-\-cflags cairo")"; cp *.so ../gym-master
 
 The game is now compiled with custom settings.
 
-*Environment configuration*
+# *Environment configuration*
 
 Navigate to Gym-rijnder/gym-master/gym/envs/space_fortress/ and change the desired values in Config.py. To check whether the game works as desired, execute run.py.
 
